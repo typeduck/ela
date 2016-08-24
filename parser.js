@@ -39,8 +39,8 @@ function parse (buf) {
   } else {
     data.temperature = decVal * 0.0625
   }
-  // humidity interpretation (i think docs have a mistake...)
-  data.humidity = -2.0468 + 0.0367 * decVal - 1.5955e-6 * decVal // * decVal
+  // humidity interpretation
+  data.humidity = -2.0468 + 0.0367 * decVal - 1.5955e-6 * decVal * decVal
   // movement interpretation
   data.movementSensor = decVal / 0xFFE
   // analog input

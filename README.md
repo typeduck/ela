@@ -11,7 +11,7 @@ This parsing function assumes no knowledge about the particular type of RFID tag
 in question. It could be a simple ID tag, or measure temperature, humidity,
 movement, or an analog input.
 
-This method simply includes *all* the possible interpretations of the data. A
+This method simply includes *all* the possible interpretations of the data.  A
 full, proper interpretation of the data requires knowledge of the tag type. How
 to acheive this is left as an exercise for the reader :-)
 

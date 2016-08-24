@@ -103,10 +103,11 @@ describe('ELA', function () {
     data.tagIdLong.should.equal('1234')
     data.disappeared.should.equal(true)
   })
-  it.skip('should parse sample RH sensor from manual', function () {
+  it('should parse sample RH sensor from manual', function () {
     let buf = new Buffer('[6E14DE01]', 'ascii')
     let data = parse(buf)
     data.tagIdShort.should.equal('1')
-    data.humidity.should.be.approximately(41.19, 0.01)
+    // doc calculation is slightly different, using value from my HP 15c :)
+    data.humidity.should.be.approximately(41.204, 0.01)
   })
 })
