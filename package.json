@@ -1,10 +1,10 @@
 {
   "name": "ela",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "parsing for ELA RFID data",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "./node_modules/.bin/mocha"
   },
   "author": "Ruquay K Calloway",
   "license": "MIT",

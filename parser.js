@@ -1,3 +1,5 @@
+'use strict'
+
 // parsing function
 function parse (buf) {
   const len = buf.length
