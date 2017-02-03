@@ -1,6 +1,6 @@
 {
   "name": "ela",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "parsing for ELA RFID data",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,10 @@
   },
   "author": "Ruquay K Calloway",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/typeduck/ela.git"
+  },
   "devDependencies": {
     "mocha": "^3.0.2",
     "should": "^11.1.0"
