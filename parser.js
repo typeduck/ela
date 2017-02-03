@@ -30,8 +30,13 @@ function parse (buf) {
 
   // peel the onion back further - actual data portion
   data.tagIdLong = inner.slice(1, -1).toString('hex').toUpperCase()
-  // for 'short' tag ID, last 3 nibbles are used for sensor data!
-  data.tagIdShort = data.tagIdLong.slice(0, -3)
+  // NOTE: in reality, the tagIdShort is HALF of the total, or, in 16-bit mode,
+  // there is only a single nibble available for the tagIdShort.
+  if (inner.length === 4) {
+    data.tagIdShort = data.tagIdLong.slice(0, -3)
+  } else {
+    data.tagIdShort = data.tagIdLong.slice(0, data.tagIdLong.length / 2)
+  }
 
   // get the (unsigned) decimal value from final 12 bits
   const decVal = parseInt(data.tagIdLong.slice(-3), 16)

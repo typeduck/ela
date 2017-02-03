@@ -111,4 +111,10 @@ describe('ELA', function () {
     // doc calculation is slightly different, using value from my HP 15c :)
     data.humidity.should.be.approximately(41.204, 0.01)
   })
+  it('should parse sample Tag IDs', function () {
+    let buf = new Buffer('[6EDEADBEEF01]', 'ascii')
+    let data = parse(buf)
+    data.tagIdShort.should.equal('DEAD')
+    data.tagIdLong.should.equal('DEADBEEF')
+  })
 })
