@@ -32,6 +32,8 @@ try {
   data.lowBattMovement     // is dependent on type of tag
   data.lowBattAnalogInput
   data.lowBattTemperature
+  data.lowBatt // Low battery alarm, alarm info activated
+  data.breakout // breakout, alarm info activated
 } catch(e) {
   // buffer could not have been valid ELA reader data!
 }

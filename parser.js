@@ -37,6 +37,9 @@ function parse (buf) {
   } else {
     data.tagIdShort = data.tagIdLong.slice(0, data.tagIdLong.length / 2)
   }
+  const firstNibble = data.tagIdLong[0]
+  data.breakout = !!(firstNibble & 1)
+  data.lowBatt = !!(firstNibble & 2)
 
   // get the (unsigned) decimal value from final 12 bits
   const decVal = parseInt(data.tagIdLong.slice(-3), 16)
