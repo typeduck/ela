@@ -1,6 +1,6 @@
 {
   "name": "ela",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "parsing for ELA RFID data",
   "main": "index.js",
   "scripts": {

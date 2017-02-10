@@ -114,7 +114,7 @@ describe('ELA', function () {
   it('should parse sample Tag IDs', function () {
     let buf = new Buffer('[6EDEADBEEF01]', 'ascii')
     let data = parse(buf)
-    data.tagIdShort.should.equal('DEAD')
+    data.tagIdShort.should.equal('DEADB')
     data.tagIdLong.should.equal('DEADBEEF')
   })
   it('should parse Alarm Bits', function () {
