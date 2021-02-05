@@ -19,7 +19,7 @@ function parse (buf) {
     inner = buf.slice(1, -1)
   } else if (len === 10 || len === 12 || len === 14) {
     // hex mode: translate to binary
-    inner = new Buffer(buf.slice(1, -1).toString('ascii'), 'hex')
+    inner = Buffer.from(buf.slice(1, -1).toString('ascii'), 'hex')
   } else {
     throw new Error('Buffer length must be 6/7/8 (binary) or 10/12/14 (hex)')
   }

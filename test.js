@@ -7,14 +7,14 @@ let parse = require('./index').getParser()
 
 describe('ELA', function () {
   it('should parse sample temperature (binary mode)', function () {
-    let buf = new Buffer([
+    let buf = Buffer.from([
       0x5b, // [
-      110,  // 1 byte for signal strength
+      110, // 1 byte for signal strength
       0x12, // id-byte
       0x3E, // id-nibble + first data nibble
       0x6F, // data byte
       1, // 1 byte for reader id
-      0x5d  // ]
+      0x5d // ]
     ])
     let data = parse(buf)
     data.disappeared.should.equal(false)
@@ -26,7 +26,7 @@ describe('ELA', function () {
   it('should parse using id of 2/3/4 bytes (hex mode)', function () {
     for (let i = 2; i <= 4; i++) {
       let tagLong = ('1234567890').substr(0, i * 2)
-      let buf = new Buffer('[6e' + tagLong + '01]', 'ascii')
+      let buf = Buffer.from('[6e' + tagLong + '01]', 'ascii')
       let data = parse(buf)
       data.disappeared.should.equal(false)
       data.rssi.should.equal(0x6e)
@@ -48,7 +48,7 @@ describe('ELA', function () {
       'c90': -55.0
     }
     for (let hex in expect) {
-      let buf = new Buffer([
+      let buf = Buffer.from([
         0x5b,
         110, // signal
         parseInt('1' + hex.substr(0, 1), 16), // tagID=1
@@ -63,7 +63,7 @@ describe('ELA', function () {
   })
 
   it('should parse low battery for temperature sensor', function () {
-    let buf = new Buffer([
+    let buf = Buffer.from([
       0x5b,
       110, // signal
       parseInt('17', 16), // tagID=1, data=7ff
@@ -76,7 +76,7 @@ describe('ELA', function () {
     data.lowBattTemperature.should.equal(true)
   })
   it('should parse low battery (RH/movement/analog input)', function () {
-    let buf = new Buffer([
+    let buf = Buffer.from([
       0x5b,
       110, // signal
       parseInt('1f', 16), // tagID=1, data=fff
@@ -92,7 +92,7 @@ describe('ELA', function () {
     data.lowBattTemperature.should.equal(false)
   })
   it('should parse disappeared tag', function () {
-    let buf = new Buffer([
+    let buf = Buffer.from([
       0x5d,
       110, // signal
       0x12,
@@ -105,14 +105,14 @@ describe('ELA', function () {
     data.disappeared.should.equal(true)
   })
   it('should parse sample RH sensor from manual', function () {
-    let buf = new Buffer('[6E14DE01]', 'ascii')
+    let buf = Buffer.from('[6E14DE01]', 'ascii')
     let data = parse(buf)
     data.tagIdShort.should.equal('1')
     // doc calculation is slightly different, using value from my HP 15c :)
     data.humidity.should.be.approximately(41.204, 0.01)
   })
   it('should parse sample Tag IDs', function () {
-    let buf = new Buffer('[6EDEADBEEF01]', 'ascii')
+    let buf = Buffer.from('[6EDEADBEEF01]', 'ascii')
     let data = parse(buf)
     data.tagIdShort.should.equal('DEADB')
     data.tagIdLong.should.equal('DEADBEEF')
@@ -120,19 +120,19 @@ describe('ELA', function () {
   it('should parse Alarm Bits', function () {
     let buf
     let data
-    buf = new Buffer('[6E0EADBEEF01]', 'ascii')
+    buf = Buffer.from('[6E0EADBEEF01]', 'ascii')
     data = parse(buf)
     data.lowBatt.should.be.false()
     data.breakout.should.be.false()
-    buf = new Buffer('[6E1EADBEEF01]', 'ascii')
+    buf = Buffer.from('[6E1EADBEEF01]', 'ascii')
     data = parse(buf)
     data.lowBatt.should.be.false()
     data.breakout.should.be.true()
-    buf = new Buffer('[6E2EADBEEF01]', 'ascii')
+    buf = Buffer.from('[6E2EADBEEF01]', 'ascii')
     data = parse(buf)
     data.lowBatt.should.be.true()
     data.breakout.should.be.false()
-    buf = new Buffer('[6E3EADBEEF01]', 'ascii')
+    buf = Buffer.from('[6E3EADBEEF01]', 'ascii')
     data = parse(buf)
     data.lowBatt.should.be.true()
     data.breakout.should.be.true()
